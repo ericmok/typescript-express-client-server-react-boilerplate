@@ -3,9 +3,12 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: {
+    client: "./src/client/index.tsx",
+    server: "./src/server/server.tsx"
+  },
   output: {
-      filename: "index.js",
+      filename: "[name].js",
       path: __dirname + "/dist"
   },
 
@@ -45,7 +48,7 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin("--"),
     new HtmlWebpackPlugin({
-      template: __dirname + '/src/index.html'
+      template: __dirname + '/src/client/index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin("style.css")
