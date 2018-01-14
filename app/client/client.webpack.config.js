@@ -3,13 +3,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    client: "./src/client/index.tsx",
-    server: "./src/server/server.tsx"
-  },
+  entry: __dirname + "/index.tsx",
   output: {
-      filename: "[name].js",
-      path: __dirname + "/dist"
+      filename: "client.js",
+      path: __dirname + '/../public/'
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -23,7 +20,15 @@ module.exports = {
   module: {
       rules: [
           // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-          { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+          { 
+            test: /\.tsx?$/, 
+            loader: "awesome-typescript-loader",
+            query: {
+              // Notice how this path depends on where webpack is called from
+              // Pretty sure this is a bug...
+              configFileName: "./app/client/tsconfig.json"
+            }
+          },
 
           // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
           { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
@@ -41,19 +46,21 @@ module.exports = {
   // assume a corresponding global variable exists and use that instead.
   // This is important because it allows us to avoid bundling all of our
   // dependencies, which allows browsers to cache those libraries between builds.
-  externals: {
-      "react": "React",
-      "react-dom": "ReactDOM"
-  },
+  // externals: {
+  //     "react": "React",
+  //     "react-dom": "ReactDOM"
+  // },
   plugins: [
     new webpack.BannerPlugin("--"),
-    new HtmlWebpackPlugin({
-      template: __dirname + '/src/client/index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   template: __dirname + 'src/client/index.html'
+    // }),
+    //new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin("style.css")
   ],
+
   devServer: {
-    hot: true
+    //hot: true
+    contentBase: './'
   }
 };
