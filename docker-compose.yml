@@ -1,0 +1,18 @@
+version: "3"
+services:
+  #mongo:
+  #  container_name: mongo1234
+  #  image: mongo
+  #  volumes:
+  #    - ./data:/data/db
+  #  ports:
+  #    - "27017:27017"
+  app:
+    container_name: app
+    build: .
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    #volumes:
+    #  - ./app:/usr/src/app

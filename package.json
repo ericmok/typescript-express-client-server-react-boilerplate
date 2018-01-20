@@ -9,9 +9,12 @@
     "dev:client": "xdg-open http://localhost:8080/app/client && webpack-dev-server --progress --config ./app/client/client.webpack.config.js",
     "build:server": "tsc -p ./app/server/tsconfig.json",
     "dev:server": "concurrently \"tsc -w -p ./app/server/tsconfig.json\" \"nodemon --inspect app/dist/server.js\"",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "serve": "nodemon --inspect app/dist/server.js",
     "assets": "ts-node copyAssets.ts", 
-    "build": "npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server",
+    "start": "npm run build && npm run serve",
+    "dev:docker": "docker-compose -f dev.docker-compose.yml up"
   },
   "author": "",
   "license": "ISC",
