@@ -1,4 +1,4 @@
-## typescript-express-client-server-react-minmial-boilerplate
+### A Template for Typescript, Express server, React client
 
 #### Rundown
 
