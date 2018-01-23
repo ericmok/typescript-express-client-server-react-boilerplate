@@ -30,12 +30,12 @@ tsc was used to compile server source code.
 For watching source code changes on the server side, 
 nodemon was used instead of webpack-dev-server.
 
-After development of the client is finished, how is the client served?
-
 While it may be okay for client html files to be served by 
-webpack-dev-server, in production, the Express server needs 
-a way to find the client's html files in order to serve them!
+webpack-dev-server in development, the Express server needs 
+a way to find the client's html files in order to serve them in
+production. 
 
-Thus when the npm script to build the client is run, these html
-files are copied to a location that is accessible to the server's
-final bundled script.
+This template demonstrates how this can be solved with an npm helper
+script. When the npm script to build the client is run, 
+html files in the client directory files are copied to a location 
+that is accessible to the server's final bundled script.
